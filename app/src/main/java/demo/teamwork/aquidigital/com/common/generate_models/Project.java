@@ -101,6 +101,6 @@ public abstract class Project {
 	public abstract String status();
 
 	public static TypeAdapter<Project> typeAdapter(Gson gson) {
-		return new AutoValue_ProjectsItem.GsonTypeAdapter(gson);
+		return new AutoValue_Project.GsonTypeAdapter(gson);
 	}
 }
