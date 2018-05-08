@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.com.common.generate_models;
+package demo.teamwork.aquidigital.com.common.model;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.TypeAdapter;

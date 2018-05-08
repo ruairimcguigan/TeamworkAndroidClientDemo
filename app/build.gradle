@@ -13,11 +13,17 @@ android {
     buildTypes {
         debug {
             buildConfigField 'String', "API_KEY", API_KEY
+            buildConfigField 'String', "BASE_URL", BASE_URL
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -45,10 +51,7 @@ android {
 //    exclude 'META-INF/rxjava.properties'
 //}
 
-//compileOptions {
-//    sourceCompatibility JavaVersion.VERSION_1_8
-//    targetCompatibility JavaVersion.VERSION_1_8
-//}
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
