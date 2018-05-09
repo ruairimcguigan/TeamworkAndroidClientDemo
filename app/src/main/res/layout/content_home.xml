@@ -8,4 +8,9 @@
     tools:context=".features.home.HomeActivity"
     tools:showIn="@layout/activity_home">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="home activity"/>
+
 </android.support.constraint.ConstraintLayout>

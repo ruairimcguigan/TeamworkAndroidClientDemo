@@ -1,6 +1,7 @@
 package demo.teamwork.aquidigital.com.common.di;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 
 import com.bluelinelabs.conductor.Controller;
 
@@ -12,39 +13,44 @@ import javax.inject.Provider;
 
 import dagger.android.AndroidInjector;
 import demo.teamwork.aquidigital.com.common.base.BaseActivity;
-import demo.teamwork.aquidigital.com.common.base.BaseController;
+import demo.teamwork.aquidigital.com.common.base.BaseFragment;
 
 @ActivityScope
 public class ScreenInjector {
 
-    private final Map<Class<? extends Controller>, Provider<AndroidInjector.Factory<? extends Controller>>> screenInjector;
-    private final Map<String, AndroidInjector<Controller>> cache = new HashMap<>();
+    private final Map<Class<? extends Fragment>, Provider<AndroidInjector.Factory<? extends Fragment>>> screenInjectors;
+    private final Map<String, AndroidInjector<Fragment>> cache = new HashMap<>();
 
     @Inject
-    public ScreenInjector(Map<Class<? extends Controller>, Provider<AndroidInjector.Factory<? extends Controller>>> screenInjector) {
-        this.screenInjector = screenInjector;
+    ScreenInjector(Map<Class<? extends Fragment>, Provider<AndroidInjector.Factory<? extends Fragment>>> screenInjectors) {
+        this.screenInjectors = screenInjectors;
     }
 
-    void inject(Controller controller){
-        if (!(controller instanceof BaseController)){
-            throw new IllegalArgumentException("Controller must extend BaseController");
+    void inject(Fragment fragment) {
+        if (!(fragment instanceof BaseFragment)) {
+            throw new IllegalArgumentException("Fragment must extend BaseFragment");
         }
 
-        String instanceId = controller.getInstanceId();
-        if (cache.containsKey(instanceId)){
-            cache.get(instanceId).inject(controller);
+        String instanceId = fragment.getArguments().getString("instance_id");
+        if (cache.containsKey(instanceId)) {
+            cache.get(instanceId).inject(fragment);
+            return;
         }
 
-        AndroidInjector.Factory<Controller> injectorFactory = (AndroidInjector.Factory<Controller>) screenInjector.get(controller.getClass()).get();
-        AndroidInjector<Controller> injector = injectorFactory.create(controller);
-
+        //noinspection unchecked
+        AndroidInjector.Factory<Fragment> injectorFactory =
+                (AndroidInjector.Factory<Fragment>) screenInjectors.get(fragment.getClass()).get();
+        AndroidInjector<Fragment> injector = injectorFactory.create(fragment);
         cache.put(instanceId, injector);
-        injector.inject(controller);
+        injector.inject(fragment);
     }
 
-    void clear(Controller controller){
-        cache.remove(controller.getInstanceId());
-    }
+//    void clear(Fragment fragment) {
+//        AndroidInjector<?> injector = cache.remove(fragment.getArguments().getString("instance_id"));
+//        if (injector instanceof ScreenComponent) {
+//            ((ScreenComponent) injector).disposableManager().dispose();
+//        }
+//    }
 
     static ScreenInjector get(Activity activity){
         if (!(activity instanceof BaseActivity)){

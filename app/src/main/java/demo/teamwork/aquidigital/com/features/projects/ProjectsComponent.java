@@ -6,10 +6,10 @@ import demo.teamwork.aquidigital.com.common.di.ScreenScope;
 
 @ScreenScope
 @Subcomponent
-public interface ProjectsComponent extends AndroidInjector<ProjectsController> {
+public interface ProjectsComponent extends AndroidInjector<ProjectsFragment> {
 
     @Subcomponent.Builder
-    abstract class Builder extends AndroidInjector.Builder<ProjectsController> {
+    abstract class Builder extends AndroidInjector.Builder<ProjectsFragment> {
 
     }
 }

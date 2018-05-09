@@ -23,4 +23,5 @@
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="fragment_not_created_message">New fragment should have been created</string>
 </resources>
