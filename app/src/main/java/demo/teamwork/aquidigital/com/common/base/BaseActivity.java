@@ -48,10 +48,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (screenContainer == null) {
             throw new NullPointerException("Activity must have a view with id: screen_container");
         }
-        router = Conductor.attachRouter(this, screenContainer, savedInstanceState);
-        screenNavigator.initWithRouter(router, initialScreen());
-
-        monitorBackStack();
+//        router = Conductor.attachRouter(this, screenContainer, savedInstanceState);
+//        screenNavigator.initWithRouter(router, initialScreen());
+//
+//        monitorBackStack();
         super.onCreate(savedInstanceState);
     }
 
@@ -92,29 +92,29 @@ public abstract class BaseActivity extends AppCompatActivity {
         return screenInjector;
     }
 
-    private void monitorBackStack() {
-        router.addChangeListener(new ControllerChangeHandler.ControllerChangeListener() {
-            @Override
-            public void onChangeStarted(@Nullable Controller to,
-                                        @Nullable Controller from,
-                                        boolean isPush,
-                                        @NonNull ViewGroup container,
-                                        @NonNull ControllerChangeHandler handler) {
-
-            }
-
-            @Override
-            public void onChangeCompleted(@Nullable Controller to,
-                                          @Nullable Controller from,
-                                          boolean isPush,
-                                          @NonNull ViewGroup container,
-                                          @NonNull ControllerChangeHandler handler) {
-
-                if (!isPush && from != null) {
-                    Injector.clearComponent(from);
-                }
-
-            }
-        });
-    }
+//    private void monitorBackStack() {
+//        router.addChangeListener(new ControllerChangeHandler.ControllerChangeListener() {
+//            @Override
+//            public void onChangeStarted(@Nullable Controller to,
+//                                        @Nullable Controller from,
+//                                        boolean isPush,
+//                                        @NonNull ViewGroup container,
+//                                        @NonNull ControllerChangeHandler handler) {
+//
+//            }
+//
+//            @Override
+//            public void onChangeCompleted(@Nullable Controller to,
+//                                          @Nullable Controller from,
+//                                          boolean isPush,
+//                                          @NonNull ViewGroup container,
+//                                          @NonNull ControllerChangeHandler handler) {
+//
+//                if (!isPush && from != null) {
+//                    Injector.clearComponent(from);
+//                }
+//
+//            }
+//        });
+//    }
 }

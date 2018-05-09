@@ -28,23 +28,6 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".features.projects.ProjectListActivity"
-            android:label="@string/title_item_list">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".features.projects.ProjectDetailActivity"
-            android:label="@string/title_item_detail"
-            android:parentActivityName=".features.projects.ProjectListActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".features.projects.ProjectListActivity" />
-        </activity>
-        <activity
             android:name=".features.home.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar">
